@@ -33,6 +33,8 @@ def change_bits(secret,container):
         x=im1.size[0]
         y=im1.size[1]
         
+        arr_secret= Image.fromarray(a)
+        arr_container= Image.fromarray(b)
         print(x)
         print(y)
         print("executing the algorithm")
@@ -40,13 +42,36 @@ def change_bits(secret,container):
         for i in range(0,x):
             for j in range(0,y):
                 print("Modification of the pixel "+str(i)+" "+str(j))
-                print("xxx")
+                
+
+                aux=arr_secret.getpixel((i,j))
+                aux2=arr_container.getpixel((i,j))
+
+                for k in range(0,4):
+
+                    
+                    #Secreto
+                    aux_binary= f"{aux[k]:08b}"
+                    aux_4_last_bits=aux_binary[4]+aux_binary[5]+aux_binary[6]+aux_binary[7]
+
+                    #Contenedor    
+                    aux2_binary= f"{aux2[k]:08b}"
+                    aux2_4_first_bits= aux2_binary[0]+aux2_binary[1]+aux2_binary[2]+aux2_binary[3]
+                    
+
+                    final_bytes= aux2_4_first_bits+aux_4_last_bits
+                
+                
+                print(final_bytes)
 
 
-        arr_secret= Image.fromarray(a)
-        print(im1.size)
-        print(arr_secret.getpixel((0,0)))
-        print(im2.size)
+                  
+                #final_image= Image.frombuffer
+                print(aux)
+                print(aux2)
+
+
+    
 
 
 def main():
