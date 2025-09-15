@@ -1,18 +1,26 @@
 # steganography_script
-Steganography script to Implementing the LSB method to hide one image in another
+Steganography script to Implementing the LSB method to hide one image in another image
 
 ## Algorithm
-- Opening both images (the hidden image and the container image)
-    It Use "import sys" and "from PIL import Image“* then "Image.open“
-    *PIL (or Pillow) is the most suitable library for image manipulation in Python
-- Create an image that will contain your final image (Image.new)
-- Make a loop through each pixel of the image (getpixel)
-     Remove least significant bits from the container (use a logical &)
-     Shift the most significant bits to the least significant bits of the secret (use a
-        shift to the right: >>)
-     Add the most significant bits of the container to the least significant bits of the
-        secret (use a logical |)
-- Save the image in BMP (avoids compression)
+
+The project is composed of two scripts:
+
+### Main Script
+
+1º The least significant bytes of the container is eliminated, for each pixel
+
+2º The most significant bytes of the secret image is obtaied 
+
+3º The most significant bytes of our secret image is placed as the lest significant bytes of the container image
+
+### Reversed Script
+
+1º The lest significant bytes of the image is obtained
+
+2º A new Image is created, for each pixel the significant byte will be the least significant bytes of the image (the secret image pixel)
+
+3º The leas significant bytes of each pixel will be 0.
+
 
 ## How to execute it:
 
@@ -25,3 +33,25 @@ This script requieres two arguments:
 ```bash
    python3 script.py --secret img/Secret.png --container img/Container.png 
 ```
+
+THe reverse script requires one argument:
+
+-image: corresponds to the relative path of the image that contains the secret image
+
+```bash
+   python3 reverse_script.py --image img/out.png 
+```
+
+## Example:
+
+### Container
+[!Container](img/Container.png)
+
+### Secret
+[!Secret](img/Secret.png)
+
+### Image hiding the secret
+[!out](img/out.png)
+
+### Secret recovered
+[!secret_revealed](img/secret_revealed.png)

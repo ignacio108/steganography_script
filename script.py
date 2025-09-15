@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sys
 from PIL import Image
 import numpy as np
 import argparse
@@ -9,7 +8,7 @@ import argparse
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Script to ')
+    parser = argparse.ArgumentParser(description='Script to Hide an image inside another one ')
     parser.add_argument('--secret', default='img/Secret.png',required=True, help='Path to the secret image')
     parser.add_argument('--container', default='img/Secret.png',required=True, help='Path to the container image')
     args = parser.parse_args()  
@@ -48,7 +47,7 @@ Algorithm:
 
 2º We obtain the most significant byte from the secret image 
 
-3º We put the most significant byte of our secret image in the lest significant byte of the container image
+3º We put the most significant byte of our secret image in the least significant byte of the container image
 
 
 
@@ -76,7 +75,7 @@ def change_bits(secret,container):
 
 
 
-    new_img = Image.new('RGB', (x, y))
+    new_img = Image.new('RGBA', (x, y))
     print("executing the algorithm")
 
     for i in range(0,secret.size[0]):
@@ -84,23 +83,23 @@ def change_bits(secret,container):
             #print("Modification of the pixel "+str(i)+" "+str(j))
             
 
-            aux=arr_secret.getpixel((i,j))
-            aux2=arr_container.getpixel((i,j))
+            aux_secret=arr_secret.getpixel((i,j))
+            aux_container=arr_container.getpixel((i,j))
             new_pixel=[]
 
             for k in range(0,4):
 
                 
                 #Secreto
-                aux_binary= f"{aux[k]:08b}"
-                aux_4_last_bits=aux_binary[4]+aux_binary[5]+aux_binary[6]+aux_binary[7]
+                aux_secret_binary= f"{aux_secret[k]:08b}"
+                aux_4_last_bits=aux_secret_binary[0]+aux_secret_binary[1]+aux_secret_binary[2]+aux_secret_binary[3]
 
                 #Contenedor    
-                aux2_binary= f"{aux2[k]:08b}"
-                aux2_4_first_bits= aux2_binary[0]+aux2_binary[1]+aux2_binary[2]+aux2_binary[3]
-                
+                aux_container_binary= f"{aux_container[k]:08b}"
+                aux_4_first_bits= aux_container_binary[0]+aux_container_binary[1]+aux_container_binary[2]+aux_container_binary[3]
+                #Script hecho por Ignacio ;)
 
-                final_bytes= aux2_4_first_bits+aux_4_last_bits
+                final_bytes= aux_4_first_bits+aux_4_last_bits
             
                 final_bytes_dec=int(final_bytes,2)
                 new_pixel.append(final_bytes_dec)
