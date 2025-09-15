@@ -1,19 +1,35 @@
 #!/usr/bin/env python3
-import os, sys
+import sys
 from PIL import Image
 import numpy as np
+import argparse
 
 
 
-im1 = Image.open("img/Prueba.png")
-im2 = Image.open("img/Prueba2.png")
-a = np.asarray(im1)
-b = np.asarray(im2)
+
+def main():
+
+    parser = argparse.ArgumentParser(description='Script to ')
+    parser.add_argument('--secret', default='img/Secret.png',required=True, help='Path to the secret image')
+    parser.add_argument('--container', default='img/Secret.png',required=True, help='Path to the container image')
+    args = parser.parse_args()  
+
+    im1 = Image.open(args.secret)
+    im2 = Image.open(args.container)
 
 
+    if(size_check(im1,im2)):
+    
+        new_image= change_bits(im1,im2)
+        new_image.save("img/out.png")
 
+    else:
+        print("The images have diferrent sizes")
+
+
+#Function to check the sizes of an image
 def size_check(secret,container):
-    if(im1.size != im2.size):
+    if(secret.size != container.size):
         return False
     else:
         return True
@@ -49,19 +65,23 @@ def change_bits(secret,container):
 
     #Now we can assure that the size is the same let's procced to obtain the values of the size for the loop
     
-    
+    a = np.asarray(secret)
+    b = np.asarray(container)
+
     arr_secret= Image.fromarray(a)
     arr_container= Image.fromarray(b)
 
-    x= im1.size[0]
-    y= im2.size[1]
+    x= secret.size[0]
+    y= container.size[1]
+
+
 
     new_img = Image.new('RGB', (x, y))
     print("executing the algorithm")
 
-    for i in range(0,im1.size[0]):
-        for j in range(0,im1.size[1]):
-            print("Modification of the pixel "+str(i)+" "+str(j))
+    for i in range(0,secret.size[0]):
+        for j in range(0,secret.size[1]):
+            #print("Modification of the pixel "+str(i)+" "+str(j))
             
 
             aux=arr_secret.getpixel((i,j))
@@ -87,28 +107,8 @@ def change_bits(secret,container):
             
             position=(i,j)
             new_img.putpixel(position,tuple(new_pixel))
-            # im3[i][j]=new_pixel
-                
-            #final_image= Image.frombuffer
-            print(aux)
-            print(aux2)
     return new_img
     
-
-
-def main():
-
-    if(size_check(im1,im2)):
-        
-
-        new_image= change_bits(im1,im2)
-
-        new_image.save("img/out.png")
-
-    else:
-        print("The images have diferrent sizes")
-    # im3= Image.blend(im1,im2,0.5)
-    # im3.save("img/out.png")
 
 if __name__ == "__main__":
     main()

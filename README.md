@@ -14,3 +14,14 @@ Steganography script to Implementing the LSB method to hide one image in another
         secret (use a logical |)
 - Save the image in BMP (avoids compression)
 
+## How to execute it:
+
+This script requieres two arguments:
+
+-secret: corresponds to the relative path of the secret image
+
+-container: corresponds to the relative path of the container image
+
+```bash
+   python3 script.py --secret img/Secret.png --container img/Container.png 
+```
