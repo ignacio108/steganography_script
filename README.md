@@ -45,13 +45,13 @@ THe reverse script requires one argument:
 ## Example:
 
 ### Container
-[!Container](img/Container.png)
+![Container](img/Container.png)
 
 ### Secret
-[!Secret](img/Secret.png)
+![Secret](img/Secret.png)
 
 ### Image hiding the secret
-[!out](img/out.png)
+![out](img/out.png)
 
 ### Secret recovered
-[!secret_revealed](img/secret_revealed.png)
+![secret_revealed](img/secret_revealed.png)
