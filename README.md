@@ -1,5 +1,5 @@
 # steganography_script
-Steganography script to Implementing the LSB method to hide one image in another image
+Steganography script to implement the LSB method to hide one image in another image
 
 ## Algorithm
 
@@ -7,19 +7,19 @@ The project is composed of two scripts:
 
 ### Main Script
 
-1º The least significant bytes of the container is eliminated, for each pixel
+1º The least significant bytes the container is eliminated, for each pixel
 
-2º The most significant bytes of the secret image is obtaied 
+2º The most significant bytes of the secret image is obtaied, for each pixel
 
-3º The most significant bytes of our secret image is placed as the lest significant bytes of the container image
+3º The most significant bytes of our secret image is placed as the lest significant bytes of each pixel the container image.
 
 ### Reversed Script
 
-1º The lest significant bytes of the image is obtained
+1º The least significant bytes of the image is obtained.
 
-2º A new Image is created, for each pixel the significant byte will be the least significant bytes of the image (the secret image pixel)
+2º A new Image is created, for each pixel the significant byte will be the least significant bytes of each pixel (the secret image pixel)
 
-3º The leas significant bytes of each pixel will be 0.
+3º The least significant bytes of each pixel will be 0.
 
 ## How to activate the python3 enviroment
 
@@ -41,7 +41,7 @@ This script requieres two arguments:
    python3 script.py --secret img/Secret.png --container img/Container.png 
 ```
 
-THe reverse script requires one argument:
+The reverse script requires one argument:
 
 -image: corresponds to the relative path of the image that contains the secret image
 
