@@ -21,6 +21,13 @@ The project is composed of two scripts:
 
 3º The leas significant bytes of each pixel will be 0.
 
+## How to activate the python3 enviroment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 ## How to execute it:
 
